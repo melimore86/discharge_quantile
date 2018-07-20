@@ -1,7 +1,7 @@
-library(tidyverse)
-library(lubridate)
-library(waterData)
-library(shiny)
+library("tidyverse")
+library("lubridate")
+library("waterData")
+library("shiny")
 
 # station and site
 station = '02323500'   
@@ -36,20 +36,21 @@ dis_quant$quantile <- str_remove(dis_quant$quantile, "quan") %>%
 #### UI ####
 ui <- fluidPage(
    
-   titlePanel("Display discharge quantiles"),
+   titlePanel("Suwannee River Discharge Quantiles"),
    
    sidebarLayout(
       sidebarPanel(
          sliderInput("yoi",
-                     "Years:",
-                     min = 1950,
+                     "Year:",
+                     min = 1950, sep = "",
                      max = year(Sys.Date()),
                      value = year(Sys.Date()),
                      step = 1)
       ),
       
       mainPanel(
-         plotOutput("quantPlot")
+          width = 7,
+         plotOutput("quantPlot", height = "600px")
       )
    )
 )
@@ -65,8 +66,13 @@ server <- function(input, output) {
        filter(year(dates) == input$yoi)
      
      ggplot(dis_yoi, aes(x=dates, y=val)) +
+       ylab("River Discharge (ft^3)")+
+       xlab ("Date") +
+       guides(fill=guide_legend(title="Quantiles")) +
        geom_ribbon(data = dis_quant1, aes(x=dates, ymax=val, ymin=0, fill=quantile)) +
-       geom_line()
+       geom_line(size=1.2) +
+       theme_minimal() +
+       theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
    })
 }
 
