@@ -66,6 +66,7 @@ server <- function(input, output) {
        filter(year(dates) == input$yoi)
      
      ggplot(dis_yoi, aes(x=dates, y=val)) +
+       ggtitle(input$yoi) +
        ylab("River Discharge (ft^3)")+
        xlab ("Date") +
        guides(fill=guide_legend(title="Quantiles")) +
