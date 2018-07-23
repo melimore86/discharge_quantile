@@ -19,7 +19,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 
 # Data carpentries and create quantile data table
 dis_noleap <- dis %>%
-  filter(!(month(dates) == 2 & day(dates) == 29))
+  filter(!(month(dates) == 2 & day(dates) == 29)) #<- rempving the leap day year for all years that have it
 
 dis_quant <- dis_noleap %>%
   mutate(md = strftime(dates, format = "%m-%d")) %>%
