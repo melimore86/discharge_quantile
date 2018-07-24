@@ -40,6 +40,10 @@ ui <- fluidPage(
    
    sidebarLayout(
       sidebarPanel(
+        
+        h4("Percentile Description"),
+        helpText("A percentile is a value on a scale of one hundred that indicates the percent of a distribution that is equal to or below it. For example, on the map of daily streamflow conditions a river discharge at the 90th percentile is equal to or greater than 90 percent of the discharge values recorded on this day of the year during all years that measurements have been made.  In general,a percentile greater than 75 is considered above normal, a percentile between 25 and 75 is considered normal, and a percentile less than 25 is considered below normal"),
+        
          sliderInput("yoi",
                      "Year:",
                      min = 1950, sep = "",
