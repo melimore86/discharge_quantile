@@ -65,6 +65,9 @@ server <- function(input, output) {
      dis_yoi <- dis_noleap %>%
        filter(year(dates) == input$yoi)
      
+     cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2")
+     
+     
      ggplot(dis_yoi, aes(x=dates, y=val)) +
        ggtitle(input$yoi) +
        ylab("River Discharge (ft^3)")+
@@ -72,6 +75,7 @@ server <- function(input, output) {
        guides(fill=guide_legend(title="Quantiles")) +
        geom_ribbon(data = dis_quant1, aes(x=dates, ymax=val, ymin=0, fill=quantile)) +
        geom_line(size=1.2) +
+       scale_fill_manual(values=cbPalette) +
        theme_minimal() +
        theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
    })
