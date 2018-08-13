@@ -1,0 +1,12 @@
+name: river_quantile
+title: river_quantile
+username:
+account: oysterprojectck
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 396640
+bundleId: 1523497
+url: https://oysterprojectck.shinyapps.io/river_quantile/
+when: 1533670812.09462
+asMultiple: FALSE
+asStatic: FALSE
