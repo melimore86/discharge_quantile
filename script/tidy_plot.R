@@ -78,6 +78,6 @@ quant2018<-ggplot(dis_yoi, aes(x=dates, y=val)) +
     theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
 
 require(cowplot)
-quantile_plot<-plot_grid(quant2013,quant2014, quant2015, quant2016, quant2017, quant2018, ncol=2) 
+quantile_plot<-plot_grid(quant2013,quant2014, quant2015, quant2016, quant2017, quant2018, ncol=2, labels=c("a","b","c","d","e","f")) 
 
-ggsave("quantile2013_2018.png", width= 10, height=10, dpi=300)
+ggsave("quantile2018_2018.png", width= 10, height=10, dpi=300)
