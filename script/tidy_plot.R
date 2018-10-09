@@ -49,7 +49,7 @@ dis_quant <- dis_noleap %>%
 dis_quant$quantile <- str_remove(dis_quant$quantile, "quan") %>%
   factor(levels = c("100", "75", "50", "25", "0"))
 
-# Year of interest
+# Year of interest, keep this at the current year
 yoi = 2018
 
 # Add year to dis_quant's date for plotting purpose
@@ -59,6 +59,25 @@ dis_quant1 <- dis_quant %>%
 dis_yoi <- dis_noleap %>%
   filter(year(dates) == yoi)
 
-ggplot(dis_yoi, aes(x=dates, y=val)) +
+
+# To create plots for quarterly reports
+
+library(scales)
+
+cbPalette <- c("#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2")
+
+quant2018<-ggplot(dis_yoi, aes(x=dates, y=val)) +
+  xlab("Month")+
+  ylab("River Discharge (ft^3)") +
+  labs(title= "2018",fill= "Quantile") +
   geom_ribbon(data = dis_quant1, aes(x=dates, ymax=val, ymin=0, fill=quantile)) +
-  geom_line()
+  geom_line(size=1.1) +
+    scale_fill_manual(values=cbPalette) +
+  scale_x_date(labels = date_format("%b"))+
+    theme_minimal() +
+    theme(panel.border = element_rect(colour = "black", fill=NA, size=1))
+
+require(cowplot)
+quantile_plot<-plot_grid(quant2013,quant2014, quant2015, quant2016, quant2017, quant2018, ncol=2) 
+
+ggsave("quantile2013_2018.png", width= 10, height=10, dpi=300)
