@@ -72,6 +72,7 @@ quant2018<-ggplot(dis_yoi, aes(x=dates, y=val)) +
   labs(title= "2018",fill= "Quantile") +
   geom_ribbon(data = dis_quant1, aes(x=dates, ymax=val, ymin=0, fill=quantile)) +
   geom_line(size=1.1) +
+  geom_text()
     scale_fill_manual(values=cbPalette) +
   scale_x_date(labels = date_format("%b"))+
     theme_minimal() +
